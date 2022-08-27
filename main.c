@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
 	var.stack_len = 0;
 	if (argc != 2)
 	{
-		vprintf(STDOUT_FILENO, "USAGE: monty file\n");
+		dprintf(STDOUT_FILENO, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
 	fs = fopen(argv[1], "r");
@@ -31,9 +31,9 @@ int main(int argc, char *argv[])
 		dprintf(STDOUT_FILENO, "Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
-	_exit(free_lineptr, &lineptr);
-	_exit(free_stack, &stack);
-	_exit(m_fs_close, fs);
+	onexit(free_lineptr, &lineptr);
+	onexit(free_stack, &stack);
+	onexit(m_fs_close, fs);
 	while (getline(&lineptr, &n, fs) != -1)
 	{
 		line_number++;
